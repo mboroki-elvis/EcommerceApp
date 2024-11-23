@@ -15,14 +15,25 @@ struct ProductListView: View {
         ContainerView(error: viewModel.apiError) {
             viewModel.resetError()
         } content: {
-            List(viewModel.products) { product in
-                ProductRow(product: product)
-                    .onTapGesture {
-                        router.push(.details(product))
-                    }
+            if viewModel.products.isEmpty {
+                VStack {
+                    Spacer()
+                    ProgressView().controlSize(.extraLarge).tint(.accent)
+                    Spacer()
+                }
+            } else {
+                List(viewModel.products) { product in
+                    ProductRow(product: product)
+                        .onTapGesture {
+                            router.push(.details(product))
+                        }
+                }
+                .listSectionSpacing(0)
+                .listRowBackground(Color.container)
             }
-            .listSectionSpacing(0)
-            .onAppear(perform: viewModel.fetchProducts)
         }
+        .navigationTitle(Text(with: .ourProducts))
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear(perform: viewModel.fetchProducts)
     }
 }

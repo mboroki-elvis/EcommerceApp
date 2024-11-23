@@ -14,12 +14,14 @@ class CartViewModel {
     private(set) var apiError: LocalizedError?
     private(set) var cart: [CartItem] = []
     @ObservationIgnored @Inject private var context: ModelContext
+    @ObservationIgnored @Inject private var snackBarSate: SnackbarState
     @ObservationIgnored @Inject private var cartDataSource: CartDatasourceProtocol
 
     func addToCart(item: Product) {
         defer { fetchCart() }
         do {
             try cartDataSource.addToCart(item: CartItem(product: item), context: context)
+            snackBarSate.show(title: "Added", description: item.description)
         } catch {
             apiError = error as? LocalizedError
         }

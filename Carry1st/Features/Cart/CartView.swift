@@ -34,6 +34,7 @@ struct CartView: View {
                 }
             }
             .listSectionSpacing(0)
+            .listRowBackground(Color.container)
         })
         .onAppear {
             viewModel.fetchCart()

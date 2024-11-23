@@ -29,5 +29,6 @@ struct ProductRow: View {
             }
             Spacer()
         }
+        .contentShape(Rectangle())
     }
 }

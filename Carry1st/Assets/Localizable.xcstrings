@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld" : {
+    "%@" : {
 
     },
     "add_to_cart" : {
@@ -44,6 +44,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Something went wrong!"
+          }
+        }
+      }
+    },
+    "our_products" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Our Products"
           }
         }
       }

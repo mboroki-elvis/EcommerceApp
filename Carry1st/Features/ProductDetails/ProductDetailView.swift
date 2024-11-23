@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ProductDetailView: View {
     @Environment(CartViewModel.self) private var viewModel
+    @Environment(SnackbarState.self) private var snackBarState
 
     let product: Product
-
+    
     var body: some View {
         ContainerView(error: viewModel.apiError, onDismissError: {
             viewModel.resetError()
@@ -40,6 +41,8 @@ struct ProductDetailView: View {
                     .buttonStyle(.bordered)
                 }
             }
+            .padding(.horizontal)
         })
+        .snackBar(isDisplaying: .init(get: { snackBarState.isDisplaying }, set: { snackBarState.isDisplaying = $0 }), title: "Added to Cart", description: product.name)
     }
 }

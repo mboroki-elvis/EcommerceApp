@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct Carry1stApp: App {
     @State private var router = AppRouter(.landing)
+    @Bindable private var snackBarState: SnackbarState
     static var sharedModelContainer: ModelContainer = {
         let schema = Schema([CartItem.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -23,6 +24,8 @@ struct Carry1stApp: App {
     }()
 
     init() {
+        let snackBarState = SnackbarState()
+        self.snackBarState = snackBarState
         let container = SwinjectContainer.shared
         container.register(ProductServiceProtocol.self) {
             ProductService()
@@ -42,6 +45,9 @@ struct Carry1stApp: App {
         container.register(ModelContext.self) {
             Self.sharedModelContainer.mainContext
         }
+        container.register(SnackbarState.self) {
+            snackBarState
+        }
     }
 
     var body: some Scene {
@@ -51,5 +57,6 @@ struct Carry1stApp: App {
         .modelContainer(Self.sharedModelContainer)
         .environment(router)
         .environment(CartViewModel())
+        .environment(snackBarState)
     }
 }

@@ -12,7 +12,6 @@ protocol CartDatasourceProtocol {
     func addToCart(item: CartItem, context: ModelContext) throws
     func removeFromCart(item: CartItem, context: ModelContext) throws
     func contextHas(item: CartItem, context: ModelContext) throws -> Bool
-    func findItem(by id: Int, context: ModelContext) throws -> CartItem?
     func fetchCart(context: ModelContext) throws -> [CartItem]
 }
 
@@ -34,12 +33,6 @@ struct CartDatasource: CartDatasourceProtocol {
         let predicate = #Predicate<CartItem> { $0.id == id }
         let fetchedMovie = try context.fetch(FetchDescriptor<CartItem>(predicate: predicate, sortBy: [SortDescriptor(\.id)]))
         return !fetchedMovie.isEmpty
-    }
-
-    func findItem(by id: Int, context: ModelContext) throws -> CartItem? {
-        let predicate = #Predicate<CartItem> { $0.id == id }
-        let fetchedMovie = try context.fetch(FetchDescriptor<CartItem>(predicate: predicate, sortBy: [SortDescriptor(\.id)]))
-        return fetchedMovie.first
     }
 
     func fetchCart(context: ModelContext) throws -> [CartItem] {

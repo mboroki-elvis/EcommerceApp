@@ -15,14 +15,14 @@ struct BadgeIconView: View {
         ZStack(alignment: .topTrailing) {
             Image(systemName: systemImageName)
                 .font(.title)
-                .foregroundColor(.primary)
+                .foregroundColor(.containerAlternate)
 
             if badgeCount > 0 {
-                Text("\(badgeCount)")
+                Text("\(badgeCount > 100 ? "99+" : "\(badgeCount)")")
                     .font(.caption2).bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(.onContainerAlternate)
                     .frame(width: 18, height: 18)
-                    .background(Color.red)
+                    .background(Color.accentColor)
                     .clipShape(Circle())
                     .offset(x: 4, y: 0)
             }

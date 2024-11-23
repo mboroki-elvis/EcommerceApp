@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class CartItem: Identifiable {
-    @Attribute(.unique) var id: Int
+    @Attribute(.unique) var id = UUID()
     var imageLocation: String
     var name: String
     var itemDescription: String
@@ -20,8 +20,7 @@ final class CartItem: Identifiable {
     var currencyCode: String
     var currencySymbol: String
 
-    init(id: Int, imageLocation: String, name: String, itemDescription: String, price: Double, quantity: Double, status: String, currencyCode: String, currencySymbol: String) {
-        self.id = id
+    init(imageLocation: String, name: String, itemDescription: String, price: Double, quantity: Double, status: String, currencyCode: String, currencySymbol: String) {
         self.imageLocation = imageLocation
         self.name = name
         self.itemDescription = itemDescription
@@ -36,7 +35,6 @@ final class CartItem: Identifiable {
 extension CartItem {
     convenience init(product: Product) {
         self.init(
-            id: product.id,
             imageLocation: product.imageLocation,
             name: product.name,
             itemDescription: product.description,
