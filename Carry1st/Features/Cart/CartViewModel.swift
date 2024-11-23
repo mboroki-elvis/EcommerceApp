@@ -11,26 +11,38 @@ import SwiftData
 
 @Observable
 class CartViewModel {
+    private(set) var apiError: LocalizedError?
+    private(set) var cart: [CartItem] = []
     @ObservationIgnored @Inject private var context: ModelContext
     @ObservationIgnored @Inject private var cartDataSource: CartDatasourceProtocol
 
-    var itemCount: Int {
+    func addToCart(item: Product) {
+        defer { fetchCart() }
         do {
-            return try cartDataSource.fetchAllFavorites(context: context).count
+            try cartDataSource.addToCart(item: CartItem(product: item), context: context)
         } catch {
-            return .zero
+            apiError = error as? LocalizedError
         }
     }
 
-    func addToCart(item: Product) {
-        do {
-            try cartDataSource.addToCart(item: CartItem(product: item), context: context)
-        } catch {}
-    }
-
     func removeFromCart(item: CartItem) {
+        defer { fetchCart() }
         do {
             try cartDataSource.removeFromCart(item: item, context: context)
-        } catch {}
+        } catch {
+            apiError = error as? LocalizedError
+        }
+    }
+
+    func fetchCart() {
+        do {
+            cart = try cartDataSource.fetchCart(context: context)
+        } catch {
+            apiError = error as? LocalizedError
+        }
+    }
+
+    func resetError() {
+        apiError = nil
     }
 }

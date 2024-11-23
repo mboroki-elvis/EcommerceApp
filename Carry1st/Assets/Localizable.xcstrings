@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld" : {
+
+    },
     "add_to_cart" : {
       "extractionState" : "manual",
       "localizations" : {

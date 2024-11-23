@@ -12,7 +12,7 @@ struct ProductListView: View {
     @State private var viewModel: ProductListViewModel = .init()
 
     var body: some View {
-        ContainerView {
+        ContainerView(error: viewModel.apiError) {
             viewModel.resetError()
         } content: {
             List(viewModel.products) { product in
@@ -21,6 +21,7 @@ struct ProductListView: View {
                         router.push(.details(product))
                     }
             }
+            .listSectionSpacing(0)
             .onAppear(perform: viewModel.fetchProducts)
         }
     }

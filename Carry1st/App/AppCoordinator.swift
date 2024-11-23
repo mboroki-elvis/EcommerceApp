@@ -40,15 +40,16 @@ struct AppCoordinator: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
+                    guard router.currentRoute != .cart else { return }
                     router.push(.cart)
                 }, label: {
-                    Image(systemName: "cart.circle.fill")
-                        .foregroundColor(.blue).padding(4)
+                    BadgeIconView(badgeCount: viewModel.cart.count, systemImageName:  "cart.circle.fill")
                 })
-                .buttonStyle(PlainButtonStyle()) // turn off design, only behavior
-                .badge(viewModel.itemCount)
             }
         }
         .background(Color(UIColor.systemGroupedBackground))
+        .onAppear {
+            viewModel.fetchCart()
+        }
     }
 }

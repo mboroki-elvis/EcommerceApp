@@ -10,23 +10,34 @@ import SwiftData
 
 struct CartView: View {
     @Environment(CartViewModel.self) private var viewModel
-    @Query private var items: [CartItem]
 
     var body: some View {
-        List {
-            ForEach(items) { product in
-                HStack {
-                    Text(product.name)
-                    Spacer()
-                    Button(action: {
-                        viewModel.removeFromCart(item: product)
-                    }) {
-                        Image(systemName: "trash")
+        ContainerView(error: viewModel.apiError, onDismissError: {
+            viewModel.resetError()
+        }, content: {
+            List {
+                ForEach(viewModel.cart) { product in
+                    HStack {
+                        Text(product.name)
+                        Spacer()
+                        Button(action: {
+                            viewModel.removeFromCart(item: product)
+                        }) {
+                            Image(systemName: "trash")
+                        }
+                        .buttonStyle(.borderless)
                     }
-                    .buttonStyle(.borderless)
+                }.onDelete { set in
+                    set.forEach { index in
+                        viewModel.removeFromCart(item: viewModel.cart[index])
+                    }
                 }
             }
+            .listSectionSpacing(0)
+        })
+        .onAppear {
+            viewModel.fetchCart()
         }
-        .navigationTitle(LocalizableKeys.cart.rawValue)
+        .navigationTitle(Text(with: .cart))
     }
 }

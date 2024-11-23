@@ -13,7 +13,7 @@ protocol CartDatasourceProtocol {
     func removeFromCart(item: CartItem, context: ModelContext) throws
     func contextHas(item: CartItem, context: ModelContext) throws -> Bool
     func findItem(by id: Int, context: ModelContext) throws -> CartItem?
-    func fetchAllFavorites(context: ModelContext) throws -> [CartItem]
+    func fetchCart(context: ModelContext) throws -> [CartItem]
 }
 
 struct CartDatasource: CartDatasourceProtocol {
@@ -42,7 +42,7 @@ struct CartDatasource: CartDatasourceProtocol {
         return fetchedMovie.first
     }
 
-    func fetchAllFavorites(context: ModelContext) throws -> [CartItem] {
+    func fetchCart(context: ModelContext) throws -> [CartItem] {
         try context.fetch(FetchDescriptor<CartItem>(sortBy: [SortDescriptor(\.id)]))
     }
 }
