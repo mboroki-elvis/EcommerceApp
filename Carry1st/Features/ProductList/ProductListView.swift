@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct ProductListView: View {
+    @Environment(AppRouter.self) private var router: AppRouter
     @State private var viewModel: ProductListViewModel = .init()
 
     var body: some View {
-        List(viewModel.products) { product in
-            ProductRow(product: product)
+        ContainerView {
+            viewModel.resetError()
+        } content: {
+            List(viewModel.products) { product in
+                ProductRow(product: product)
+                    .onTapGesture {
+                        router.push(.details(product))
+                    }
+            }
+            .onAppear(perform: viewModel.fetchProducts)
         }
-        .onAppear(perform: viewModel.fetchProducts)
     }
 }

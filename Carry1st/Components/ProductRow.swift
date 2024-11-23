@@ -12,7 +12,7 @@ struct ProductRow: View {
 
     var body: some View {
         HStack {
-            CachedAsyncImage(url: product.logoURL) { image in
+            CachedAsyncImage(url: URL(string: product.imageLocation)) { image in
                 image.resizable()
             } placeholder: {
                 ProgressView().tint(.accent)

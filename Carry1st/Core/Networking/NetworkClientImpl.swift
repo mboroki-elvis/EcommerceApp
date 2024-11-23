@@ -13,12 +13,13 @@ struct NetworkClientImpl: NetworkClient {
     var dump: Bool = true
 
     private let urlSession: URLSession
-    private let environment = EnvironmentLive()
+    private var environment: AppEnvironment
 
     // MARK: - Initializers
 
     init(urlSession: URLSession = URLSession.shared) {
         self.urlSession = urlSession
+        self.environment = SwinjectContainer.shared.resolve(AppEnvironment.self)
     }
 
     // MARK: - Protocol Methods

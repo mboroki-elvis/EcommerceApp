@@ -6,10 +6,16 @@
 //
 
 import Observation
+import SwiftData
 
 @Observable
 class CartViewModel {
     var items: [Product] = []
+    private var context: ModelContext
+    
+    init(context: ModelContext) {
+        self.context = context
+    }
 
     func addToCart(product: Product) {
         items.append(product)

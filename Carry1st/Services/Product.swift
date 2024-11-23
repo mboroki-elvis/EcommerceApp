@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Product: Codable, Identifiable {
+struct Product: Codable, Identifiable, Hashable {
     let id: Int
-    let name: String
-    let price: Double
-    let description: String
-    let logoURL: URL
+    var imageLocation: String
+    var name: String
+    var price: Double
+    var quantity: Double
+    var status: String
+    var currencyCode: String
+    var currencySymbol: String
+    var description: String
 }
 

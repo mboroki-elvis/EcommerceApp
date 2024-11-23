@@ -11,7 +11,8 @@ import SwiftUI
 enum LocalizableKeys: String {
     case addToCart = "add_to_cart"
     case buyNow = "buy_now"
-    case error = "Something went wrong!"
+    case error = "error"
+    case cart = "cart"
 
     func toLocalizableKey() -> LocalizedStringKey {
         LocalizedStringKey(self.rawValue)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(CartViewModel.self) private var viewModel
 
     let product: Product

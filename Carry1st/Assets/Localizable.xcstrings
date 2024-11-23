@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "$%.2f" : {
+
+    },
     "add_to_cart" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +22,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buy Now"
+          }
+        }
+      }
+    },
+    "cart" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cart"
           }
         }
       }

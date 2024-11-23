@@ -7,21 +7,25 @@
 
 import Observation
 import Swinject
+import Foundation
 
 @Observable
 final class ProductListViewModel {
+    private(set) var apiError: LocalizedError?
     private(set) var products: [Product] = []
     @ObservationIgnored @Inject private var productService: ProductServiceProtocol
-
-    init() {}
 
     func fetchProducts() {
         Task {
             do {
-                let response = try await productService.fetchProducts()
+                self.products = try await productService.fetchProducts()
             } catch {
-                
+                apiError = error as? LocalizedError
             }
         }
+    }
+    
+    func resetError() {
+        apiError = nil
     }
 }

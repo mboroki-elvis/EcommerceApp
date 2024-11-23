@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CartView: View {
     @Environment(CartViewModel.self) private var viewModel
+    @Query private var items: [CartItem]
 
     var body: some View {
         List {
-            ForEach(viewModel.items) { product in
+            ForEach(items) { product in
                 HStack {
                     Text(product.name)
                     Spacer()
                     Button(action: {
-                        viewModel.removeFromCart(product: product)
+//                        viewModel.removeFromCart(product: product)
                     }) {
                         Image(systemName: "trash")
                     }
@@ -25,6 +27,6 @@ struct CartView: View {
                 }
             }
         }
-        .navigationTitle("Cart")
+        .navigationTitle(LocalizableKeys.cart.rawValue)
     }
 }

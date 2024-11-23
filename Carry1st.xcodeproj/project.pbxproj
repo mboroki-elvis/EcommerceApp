@@ -33,9 +33,22 @@
 		C46A94172CF0BC4800C58CEB /* Carry1stUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Carry1stUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C46A955E2CF2173700C58CEB /* Exceptions for "Carry1st" folder in "Carry1st" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C46A93FA2CF0BC4400C58CEB /* Carry1st */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C46A93FD2CF0BC4400C58CEB /* Carry1st */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C46A955E2CF2173700C58CEB /* Exceptions for "Carry1st" folder in "Carry1st" target */,
+			);
 			path = Carry1st;
 			sourceTree = "<group>";
 		};
@@ -280,6 +293,8 @@
 /* Begin XCBuildConfiguration section */
 		C46A941F2CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -344,6 +359,8 @@
 		};
 		C46A94202CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -401,6 +418,8 @@
 		};
 		C46A94222CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -410,6 +429,7 @@
 				DEVELOPMENT_TEAM = X5E66Q9HX8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Carry1st/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -430,6 +450,8 @@
 		};
 		C46A94232CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -439,6 +461,7 @@
 				DEVELOPMENT_TEAM = X5E66Q9HX8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Carry1st/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,6 +482,8 @@
 		};
 		C46A94252CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -478,6 +503,8 @@
 		};
 		C46A94262CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -497,6 +524,8 @@
 		};
 		C46A94282CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -514,6 +543,8 @@
 		};
 		C46A94292CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
+			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
