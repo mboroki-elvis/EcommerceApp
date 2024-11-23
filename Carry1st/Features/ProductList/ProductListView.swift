@@ -35,8 +35,10 @@ struct ProductListView: View {
         }
         .navigationTitle(Text(with: .ourProducts))
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.fetchProducts()
+        }
         .onAppear {
-            viewModel.fetchProducts()
             eventLogging.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
         }
     }

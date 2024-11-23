@@ -47,4 +47,8 @@ class SwinjectContainer {
         }
         return implementation
     }
+    
+    func removeAll(){
+        container.removeAll()
+    }
 }

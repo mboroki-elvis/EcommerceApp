@@ -16,14 +16,12 @@ final class ProductListViewModel {
     @ObservationIgnored @Inject private var productService: ProductServiceProtocol
     @ObservationIgnored @Inject private var errorLogging: ErrorLoggingServiceProtocol
 
-    func fetchProducts() {
-        Task {
-            do {
-                self.products = try await productService.fetchProducts()
-            } catch {
-                apiError = error as? LocalizedError
-                errorLogging.log(event: APIErrorEvent(error: error))
-            }
+    func fetchProducts() async {
+        do {
+            self.products = try await productService.fetchProducts()
+        } catch {
+            apiError = error as? LocalizedError
+            errorLogging.log(event: APIErrorEvent(error: error))
         }
     }
     
