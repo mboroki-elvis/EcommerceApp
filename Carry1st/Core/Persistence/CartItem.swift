@@ -32,3 +32,19 @@ final class CartItem: Identifiable {
         self.currencySymbol = currencySymbol
     }
 }
+
+extension CartItem {
+    convenience init(product: Product) {
+        self.init(
+            id: product.id,
+            imageLocation: product.imageLocation,
+            name: product.name,
+            itemDescription: product.description,
+            price: product.price,
+            quantity: product.quantity,
+            status: product.status,
+            currencyCode: product.currencyCode,
+            currencySymbol: product.currencySymbol
+        )
+    }
+}

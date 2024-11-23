@@ -33,6 +33,15 @@ struct Carry1stApp: App {
         container.registerSingleton(ImageCache.self) {
             ImageCache.shared
         }
+        container.registerSingleton(NumberFormatterUtilityProtocol.self) {
+            NumberFormatterUtility.shared
+        }
+        container.register(CartDatasourceProtocol.self) {
+            CartDatasource()
+        }
+        container.register(ModelContext.self) {
+            Self.sharedModelContainer.mainContext
+        }
     }
 
     var body: some Scene {
@@ -41,6 +50,6 @@ struct Carry1stApp: App {
         }
         .modelContainer(Self.sharedModelContainer)
         .environment(router)
-        .environment(CartViewModel(context: Self.sharedModelContainer.mainContext))
+        .environment(CartViewModel())
     }
 }

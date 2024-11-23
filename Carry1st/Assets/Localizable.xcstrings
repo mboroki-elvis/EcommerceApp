@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "$%.2f" : {
-
-    },
     "add_to_cart" : {
       "extractionState" : "manual",
       "localizations" : {

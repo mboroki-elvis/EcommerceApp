@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProductRow: View {
     let product: Product
-
+    @Inject private var formatterUtility: NumberFormatterUtilityProtocol
+    
     var body: some View {
         HStack {
             CachedAsyncImage(url: URL(string: product.imageLocation)) { image in
@@ -23,7 +24,7 @@ struct ProductRow: View {
             VStack(alignment: .leading) {
                 Text(product.name)
                     .font(.headline)
-                Text("$\(product.price, specifier: "%.2f")")
+                Text(formatterUtility.string(from: product.price as NSNumber, currency: product.currencySymbol) ?? "")
                     .font(.subheadline)
             }
             Spacer()

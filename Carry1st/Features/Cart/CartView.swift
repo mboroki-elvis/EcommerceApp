@@ -19,7 +19,7 @@ struct CartView: View {
                     Text(product.name)
                     Spacer()
                     Button(action: {
-//                        viewModel.removeFromCart(product: product)
+                        viewModel.removeFromCart(item: product)
                     }) {
                         Image(systemName: "trash")
                     }

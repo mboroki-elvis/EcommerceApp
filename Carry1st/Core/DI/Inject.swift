@@ -9,9 +9,18 @@ import Swinject
 
 @propertyWrapper
 struct Inject<T> {
-    public lazy var wrappedValue = SwinjectContainer.shared.resolve(T.self)
+    private let dependency: T
 
-    public init() {}
+     init() {
+         guard let resolvedDependency = SwinjectContainer.shared.container.resolve(T.self) else {
+             fatalError("Dependency \(T.self) could not be resolved. Ensure it is registered in the Swinject container.")
+         }
+         self.dependency = resolvedDependency
+     }
+
+     var wrappedValue: T {
+         dependency
+     }
 }
 
 class SwinjectContainer {

@@ -15,17 +15,14 @@ struct ProductDetailView: View {
 
     var body: some View {
         List {
-            // Display product image, name, price, and description
-            Text(product.name)
-                .font(.title)
+            ProductRow(product: product)
             Text(product.description)
                 .font(.body)
-            Spacer()
         }
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Button(action: {
-                    viewModel.addToCart(product: product)
+                    viewModel.addToCart(item: product)
                 }) {
                     Text(with: .addToCart)
                         .frame(maxWidth: .infinity)

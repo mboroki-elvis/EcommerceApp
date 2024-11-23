@@ -18,4 +18,3 @@ struct Product: Codable, Identifiable, Hashable {
     var currencySymbol: String
     var description: String
 }
-
