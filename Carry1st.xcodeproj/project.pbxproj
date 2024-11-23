@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C46A95342CF1CD4600C58CEB /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C46A95332CF1CD4600C58CEB /* Swinject */; };
+		C46A95762CF2612B00C58CEB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C46A95752CF2612B00C58CEB /* FirebaseAnalytics */; };
+		C46A95872CF2670100C58CEB /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C46A95862CF2670100C58CEB /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46A95872CF2670100C58CEB /* FirebaseCrashlytics in Frameworks */,
+				C46A95762CF2612B00C58CEB /* FirebaseAnalytics in Frameworks */,
 				C46A95342CF1CD4600C58CEB /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +135,8 @@
 			name = Carry1st;
 			packageProductDependencies = (
 				C46A95332CF1CD4600C58CEB /* Swinject */,
+				C46A95752CF2612B00C58CEB /* FirebaseAnalytics */,
+				C46A95862CF2670100C58CEB /* FirebaseCrashlytics */,
 			);
 			productName = Carry1st;
 			productReference = C46A93FB2CF0BC4400C58CEB /* Carry1st.app */;
@@ -216,6 +222,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C46A95322CF1CD4600C58CEB /* XCRemoteSwiftPackageReference "Swinject" */,
+				C46A95742CF2612B00C58CEB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C46A93FC2CF0BC4400C58CEB /* Products */;
@@ -440,7 +447,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.commerce.Carry1st;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.commerce.Carry1st.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -472,7 +479,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.commerce.Carry1st;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.commerce.Carry1st.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -610,6 +617,14 @@
 				minimumVersion = 2.9.1;
 			};
 		};
+		C46A95742CF2612B00C58CEB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -617,6 +632,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C46A95322CF1CD4600C58CEB /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		C46A95752CF2612B00C58CEB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C46A95742CF2612B00C58CEB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C46A95862CF2670100C58CEB /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C46A95742CF2612B00C58CEB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

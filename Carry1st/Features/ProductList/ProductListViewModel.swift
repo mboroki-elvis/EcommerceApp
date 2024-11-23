@@ -14,6 +14,7 @@ final class ProductListViewModel {
     private(set) var apiError: LocalizedError?
     private(set) var products: [Product] = []
     @ObservationIgnored @Inject private var productService: ProductServiceProtocol
+    @ObservationIgnored @Inject private var errorLogging: ErrorLoggingServiceProtocol
 
     func fetchProducts() {
         Task {
@@ -21,6 +22,7 @@ final class ProductListViewModel {
                 self.products = try await productService.fetchProducts()
             } catch {
                 apiError = error as? LocalizedError
+                errorLogging.log(event: APIErrorEvent(error: error))
             }
         }
     }

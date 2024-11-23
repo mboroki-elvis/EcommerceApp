@@ -5,11 +5,12 @@
 //  Created by Elvis Mwenda on 22/11/2024.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct CartView: View {
     @Environment(CartViewModel.self) private var viewModel
+    @Inject private var eventLogging: AnalyticsServiceProtocol
 
     var body: some View {
         ContainerView(error: viewModel.apiError, onDismissError: {
@@ -38,6 +39,7 @@ struct CartView: View {
         })
         .onAppear {
             viewModel.fetchCart()
+            eventLogging.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
         }
         .navigationTitle(Text(with: .cart))
     }

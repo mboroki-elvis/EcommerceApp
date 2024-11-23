@@ -10,7 +10,8 @@ import SwiftUI
 struct ProductDetailView: View {
     @Environment(CartViewModel.self) private var viewModel
     @Environment(SnackbarState.self) private var snackBarState
-
+    @Inject private var eventLogging: AnalyticsServiceProtocol
+    
     let product: Product
     
     var body: some View {
@@ -33,7 +34,7 @@ struct ProductDetailView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     Button(action: {
-                        // Implement buy now functionality
+                        eventLogging.track(event: PurchaseEvent(product: product))
                     }) {
                         Text(with: .buyNow)
                             .frame(maxWidth: .infinity)
@@ -47,6 +48,8 @@ struct ProductDetailView: View {
             isDisplaying: .init(get: { snackBarState.isDisplaying }, set: { snackBarState.isDisplaying = $0 }),
             title: LocalizableKeys.addToCart.localized(),
             description: product.name
-        )
+        ).onAppear {
+            eventLogging.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
+        }
     }
 }

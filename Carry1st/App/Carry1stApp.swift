@@ -7,6 +7,7 @@
 
 import SwiftData
 import SwiftUI
+import Firebase
 
 @main
 struct Carry1stApp: App {
@@ -33,6 +34,12 @@ struct Carry1stApp: App {
         container.register(AppEnvironment.self) {
             EnvironmentLive()
         }
+        container.register(ErrorLoggingServiceProtocol.self) {
+            CrashlyticsErrorLoggingService()
+        }
+        container.register(AnalyticsServiceProtocol.self) {
+            FireBaseAnalyticsService()
+        }
         container.registerSingleton(ImageCache.self) {
             ImageCache.shared
         }
@@ -48,6 +55,7 @@ struct Carry1stApp: App {
         container.register(SnackbarState.self) {
             snackBarState
         }
+        FirebaseApp.configure()
     }
 
     var body: some Scene {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductListView: View {
     @Environment(AppRouter.self) private var router: AppRouter
+    @Inject private var eventLogging: AnalyticsServiceProtocol
     @State private var viewModel: ProductListViewModel = .init()
 
     var body: some View {
@@ -34,6 +35,9 @@ struct ProductListView: View {
         }
         .navigationTitle(Text(with: .ourProducts))
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: viewModel.fetchProducts)
+        .onAppear {
+            viewModel.fetchProducts()
+            eventLogging.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
+        }
     }
 }
