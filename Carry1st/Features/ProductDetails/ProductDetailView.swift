@@ -43,6 +43,10 @@ struct ProductDetailView: View {
             }
             .padding(.horizontal)
         })
-        .snackBar(isDisplaying: .init(get: { snackBarState.isDisplaying }, set: { snackBarState.isDisplaying = $0 }), title: "Added to Cart", description: product.name)
+        .snackBar(
+            isDisplaying: .init(get: { snackBarState.isDisplaying }, set: { snackBarState.isDisplaying = $0 }),
+            title: LocalizableKeys.addToCart.localized(),
+            description: product.name
+        )
     }
 }

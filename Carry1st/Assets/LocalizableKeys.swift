@@ -23,4 +23,8 @@ enum LocalizableKeys: String {
         let localized = NSLocalizedString(self.rawValue, comment: self.rawValue)
         return String(format: localized, args)
     }
+    
+    func localized() -> String {
+        NSLocalizedString(self.rawValue, comment: self.rawValue)
+    }
 }
