@@ -33,12 +33,14 @@ class ProductListViewModelTests {
     }
 
     @Test func fetchProducts() async throws {
+        MockProductService.shouldThrowError = false
         try #require(await viewModel.fetchProducts())
         #expect(viewModel.products.count > 0)
         #expect(viewModel.apiError == nil)
     }
     
     @Test func fetchProductsError() async throws {
+        MockProductService.shouldThrowError = true
         try #require(await viewModel.fetchProducts())
         #expect(viewModel.apiError != nil)
     }

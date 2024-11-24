@@ -12,10 +12,10 @@ class MockProductService: ProductServiceProtocol {
     static  var productsToReturn: [Product] = [
         .init(id: 0, imageLocation: "", name: "", price: .zero, quantity: .zero, status: "", currencyCode: "", currencySymbol: "", description: "")
     ]
-    var shouldThrowError: Bool = false
+    static var shouldThrowError: Bool = false
 
     func fetchProducts() async throws -> [Product] {
-        if shouldThrowError {
+        if Self.shouldThrowError {
             throw MockError.testError
         }
         return Self.productsToReturn

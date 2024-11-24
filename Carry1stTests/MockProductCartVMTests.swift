@@ -18,7 +18,7 @@ class MockProductCartVMTests {
         // Initialize mocks
 
         // Set up Swinject container with mock dependencies
-        var sharedModelContainer: ModelContainer = {
+        let sharedModelContainer: ModelContainer = {
             let schema = Schema([CartItem.self])
             let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
 
