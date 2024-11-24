@@ -1,0 +1,12 @@
+//
+//  TestEnvironment.xcconfig
+//  Carry1st
+//
+//  Created by Elvis Mwenda on 24/11/2024.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+APP_BASE_URL = https:/$()/my-json-server.typicode.com/carry1stdeveloper/
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = IS_TESTING

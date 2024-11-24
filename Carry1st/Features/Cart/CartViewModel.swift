@@ -14,28 +14,35 @@ class CartViewModel {
     private(set) var cart: [CartItem] = []
     private(set) var apiError: LocalizedError?
 
-    @ObservationIgnored @Inject private var context: ModelContext
-    @ObservationIgnored @Inject private var snackBarSate: SnackbarState
-    @ObservationIgnored @Inject private var cartDataSource: CartDatasourceProtocol
-    @ObservationIgnored @Inject private var eventLogging: AnalyticsServiceProtocol
-    @ObservationIgnored @Inject private var errorLogging: ErrorLoggingServiceProtocol
-
-    func addToCart(item: Product) {
-        defer { fetchCart() }
+    func addToCart(
+        item: Product,
+        datasource: CartDatasourceProtocol,
+        eventLogger: AnalyticsServiceProtocol,
+        errorLogger: ErrorLoggingServiceProtocol,
+        context: ModelContext,
+        snackBarState: SnackbarState
+    ) {
+        defer { fetchCart(datasource: datasource, errorLogger: errorLogger, context: context) }
         do {
-            try cartDataSource.addToCart(item: CartItem(product: item), context: context)
-            snackBarSate.show(title: "Added", description: item.description)
-            eventLogging.track(event: AddToCartEvent(product: item))
+            try datasource.addToCart(item: CartItem(product: item), context: context)
+            snackBarState.show(title: "Added", description: item.description)
+            eventLogger.track(event: AddToCartEvent(product: item))
         } catch {
             apiError = error as? LocalizedError
-            errorLogging.log(event: APIErrorEvent(error: error))
+            errorLogger.log(event: APIErrorEvent(error: error))
         }
     }
 
-    func removeFromCart(item: CartItem) {
-        defer { fetchCart() }
+    func removeFromCart(
+        item: CartItem,
+        datasource: CartDatasourceProtocol,
+        eventLogging: AnalyticsServiceProtocol,
+        errorLogging: ErrorLoggingServiceProtocol,
+        context: ModelContext
+    ) {
+        defer { fetchCart(datasource: datasource, errorLogger: errorLogging, context: context) }
         do {
-            try cartDataSource.removeFromCart(item: item, context: context)
+            try datasource.removeFromCart(item: item, context: context)
             eventLogging.track(event: RemoveFromCartEvent(item: item))
         } catch {
             apiError = error as? LocalizedError
@@ -43,12 +50,12 @@ class CartViewModel {
         }
     }
 
-    func fetchCart() {
+    func fetchCart(datasource: CartDatasourceProtocol, errorLogger: ErrorLoggingServiceProtocol, context: ModelContext) {
         do {
-            cart = try cartDataSource.fetchCart(context: context)
+            cart = try datasource.fetchCart(context: context)
         } catch {
             apiError = error as? LocalizedError
-            errorLogging.log(event: APIErrorEvent(error: error))
+            errorLogger.log(event: APIErrorEvent(error: error))
         }
     }
 

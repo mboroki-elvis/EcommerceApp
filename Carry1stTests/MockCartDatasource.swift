@@ -34,11 +34,3 @@ class MockCartDatasource: CartDatasourceProtocol {
         return true
     }
 }
-
-class MockAnalyticsService: AnalyticsServiceProtocol {
-    var trackedEvents: [AnalyticsEvent] = []
-
-    func track(event: AnalyticsEvent) {
-        trackedEvents.append(event)
-    }
-}

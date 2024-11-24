@@ -12,3 +12,4 @@ protocol ErrorLoggingServiceProtocol {
     /// - Parameter event: The error event to log.
     func log(event: ErrorEvent)
 }
+

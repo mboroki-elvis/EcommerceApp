@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ProductRow: View {
     let product: Product
-    @Inject private var formatterUtility: NumberFormatterUtilityProtocol
-    
+    private var formatterUtility: NumberFormatterUtilityProtocol = NumberFormatterUtility()
+    init(product: Product) {
+        self.product = product
+    }
+
     var body: some View {
         HStack {
             CachedAsyncImage(url: URL(string: product.imageLocation)) { image in

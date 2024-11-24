@@ -22,12 +22,6 @@ struct EnvironmentLive: AppEnvironment {
     var baseURL: String { string(for: .apiURL) }
 }
 
-struct EnvironmentMock: AppEnvironment {
-    var apiKey: String { "" }
-    var imageURL: String { "" }
-    var baseURL: String { "" }
-}
-
 enum EnvironmentKeys: String {
     case apiURL = "APP_BASE_URL"
 }

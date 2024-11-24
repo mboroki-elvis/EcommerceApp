@@ -12,8 +12,9 @@ import Firebase
 @main
 struct Carry1stApp: App {
     @State private var router = AppRouter(.landing)
-    @Bindable private var snackBarState: SnackbarState
-    static var sharedModelContainer: ModelContainer = {
+    @Bindable var snackBarState = SnackbarState()
+    @Bindable var imageCache = ImageCache()
+    var sharedModelContainer: ModelContainer = {
         let schema = Schema([CartItem.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,36 +26,6 @@ struct Carry1stApp: App {
     }()
 
     init() {
-        let snackBarState = SnackbarState()
-        self.snackBarState = snackBarState
-        let container = SwinjectContainer.shared
-        container.register(ProductServiceProtocol.self) {
-            ProductService()
-        }
-        container.register(AppEnvironment.self) {
-            EnvironmentLive()
-        }
-        container.register(ErrorLoggingServiceProtocol.self) {
-            CrashlyticsErrorLoggingService()
-        }
-        container.register(AnalyticsServiceProtocol.self) {
-            FireBaseAnalyticsService()
-        }
-        container.registerSingleton(ImageCache.self) {
-            ImageCache.shared
-        }
-        container.registerSingleton(NumberFormatterUtilityProtocol.self) {
-            NumberFormatterUtility.shared
-        }
-        container.register(CartDatasourceProtocol.self) {
-            CartDatasource()
-        }
-        container.register(ModelContext.self) {
-            Self.sharedModelContainer.mainContext
-        }
-        container.register(SnackbarState.self) {
-            snackBarState
-        }
         FirebaseApp.configure()
     }
 
@@ -62,9 +33,10 @@ struct Carry1stApp: App {
         WindowGroup {
             AppCoordinator()
         }
-        .modelContainer(Self.sharedModelContainer)
         .environment(router)
         .environment(CartViewModel())
         .environment(snackBarState)
+        .environment(imageCache)
+        .modelContainer(sharedModelContainer)
     }
 }

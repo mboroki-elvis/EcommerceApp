@@ -15,7 +15,7 @@ protocol NumberFormatterUtilityProtocol {
 class NumberFormatterUtility: NumberFormatterUtilityProtocol {
     static let shared = NumberFormatterUtility()
 
-    private init() {} // Prevent instantiation
+    init() {} // Prevent instantiation
 
     var currencyFormatter: NumberFormatter {
         let formatter = NumberFormatter()

@@ -11,12 +11,11 @@ import SwiftUI
 @MainActor
 @Observable
 class CachedAsyncImageViewModel {
-    @ObservationIgnored @Inject private var cache: ImageCache
 
     var uiImage: UIImage?
     var isLoading: Bool = false
 
-    func loadImage(from url: URL?) async {
+    func loadImage(from url: URL?, cache: ImageCache) async {
         guard !self.isLoading, let url = url else { return }
         self.isLoading = true
 
@@ -29,7 +28,7 @@ class CachedAsyncImageViewModel {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 if let image = UIImage(data: data) {
-                    self.cache.saveImage(image, for: url)
+                    cache.saveImage(image, for: url)
                     self.uiImage = image
                 }
             } catch {

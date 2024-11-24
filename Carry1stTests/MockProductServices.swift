@@ -9,31 +9,21 @@ import Foundation
 @testable import Carry1st
 
 class MockProductService: ProductServiceProtocol {
-    static  var productsToReturn: [Product] = [
+    static var productsToReturn: [Product] = [
         .init(id: 0, imageLocation: "", name: "", price: .zero, quantity: .zero, status: "", currencyCode: "", currencySymbol: "", description: "")
     ]
-    static var shouldThrowError: Bool = false
+    var shouldThrowError: Bool = false
 
     func fetchProducts() async throws -> [Product] {
-        if Self.shouldThrowError {
+        if shouldThrowError {
             throw MockError.testError
         }
         return Self.productsToReturn
     }
 }
 
-class MockErrorLoggingService: ErrorLoggingServiceProtocol {
-    var loggedEvents: [ErrorEvent] = []
-
-    func log(event: ErrorEvent) {
-        loggedEvents.append(event)
-    }
-}
-
 enum MockError: LocalizedError, Equatable {
     case testError
 
-    var errorDescription: String? {
-        return "Test Error"
-    }
+    var errorDescription: String? { "Test Error" }
 }

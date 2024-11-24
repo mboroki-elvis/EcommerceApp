@@ -12,3 +12,5 @@ protocol AnalyticsServiceProtocol {
     /// - Parameter event: The event to track.
     func track(event: AnalyticsEvent)
 }
+
+

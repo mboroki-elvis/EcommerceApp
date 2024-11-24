@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Combine
+import Observation
 
+@Observable
 class ImageCache {
-    static let shared = ImageCache()
     private let cache = NSCache<NSURL, UIImage>()
 
-    private init() {}
+    init() {}
 
     func getImage(for url: URL) -> UIImage? {
         return cache.object(forKey: url as NSURL)

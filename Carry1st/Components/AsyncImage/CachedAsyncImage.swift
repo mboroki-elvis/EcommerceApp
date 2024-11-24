@@ -11,7 +11,7 @@ struct CachedAsyncImage<Content: View, Placeholder: View>: View {
     private let url: URL?
     private let content: (Image) -> Content
     private let placeholder: () -> Placeholder
-
+    @Environment(ImageCache.self) var imageCache: ImageCache
     @State private var viewModel = CachedAsyncImageViewModel()
 
     init(
@@ -32,7 +32,7 @@ struct CachedAsyncImage<Content: View, Placeholder: View>: View {
                 placeholder()
                     .onAppear {
                         Task {
-                            await viewModel.loadImage(from: url)
+                            await viewModel.loadImage(from: url, cache: imageCache)
                         }
                     }
             }

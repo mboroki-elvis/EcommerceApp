@@ -10,19 +10,29 @@ import SwiftUI
 
 struct CartView: View {
     @Environment(CartViewModel.self) private var viewModel
-    @Inject private var eventLogging: AnalyticsServiceProtocol
+    @Environment(SnackbarState.self) private var snackBarState
+    @Environment(\.analyticsService) private var analyticsService
+    @Environment(\.errorLogger)  private var errorLogger
+    @Environment(\.cartDatasource)  private var cartDatasource
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         ContainerView(error: viewModel.apiError, onDismissError: {
             viewModel.resetError()
         }, content: {
             List {
-                ForEach(viewModel.cart) { product in
+                ForEach(viewModel.cart) { item in
                     HStack {
-                        Text(product.name)
+                        Text(item.name)
                         Spacer()
                         Button(action: {
-                            viewModel.removeFromCart(item: product)
+                            viewModel.removeFromCart(
+                                item: item,
+                                datasource: cartDatasource,
+                                eventLogging: analyticsService,
+                                errorLogging: errorLogger,
+                                context: modelContext
+                            )
                         }) {
                             Image(systemName: "trash")
                         }
@@ -30,7 +40,13 @@ struct CartView: View {
                     }
                 }.onDelete { set in
                     set.forEach { index in
-                        viewModel.removeFromCart(item: viewModel.cart[index])
+                        viewModel.removeFromCart(
+                            item: viewModel.cart[index],
+                            datasource: cartDatasource,
+                            eventLogging: analyticsService,
+                            errorLogging: errorLogger,
+                            context: modelContext
+                        )
                     }
                 }
             }
@@ -38,8 +54,8 @@ struct CartView: View {
             .listRowBackground(Color.container)
         })
         .onAppear {
-            viewModel.fetchCart()
-            eventLogging.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
+            viewModel.fetchCart(datasource: cartDatasource, errorLogger: errorLogger, context: modelContext)
+            analyticsService.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
         }
         .navigationTitle(Text(with: .cart))
     }

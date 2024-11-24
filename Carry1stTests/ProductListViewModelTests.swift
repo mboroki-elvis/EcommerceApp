@@ -11,20 +11,11 @@ import XCTest
 
 class ProductListViewModelTests {
     var viewModel: ProductListViewModel!
-
+    var productService: MockProductService!
+    var errorLogger: MockErrorLoggingService!
     init() async throws {
-        // Initialize mocks
-
-        // Set up Swinject container with mock dependencies
-        let container = SwinjectContainer.shared
-        container.register(ProductServiceProtocol.self) {
-            MockProductService()
-        }
-        container.register(ErrorLoggingServiceProtocol.self) {
-            MockErrorLoggingService()
-        }
-
-        // Instantiate the ViewModel
+        productService = MockProductService()
+        errorLogger = MockErrorLoggingService()
         viewModel = ProductListViewModel()
     }
 
@@ -33,15 +24,15 @@ class ProductListViewModelTests {
     }
 
     @Test func fetchProducts() async throws {
-        MockProductService.shouldThrowError = false
-        try #require(await viewModel.fetchProducts())
+        productService.shouldThrowError = false
+        try #require(await viewModel.fetchProducts(service: productService, error: errorLogger))
         #expect(viewModel.products.count > 0)
         #expect(viewModel.apiError == nil)
     }
     
     @Test func fetchProductsError() async throws {
-        MockProductService.shouldThrowError = true
-        try #require(await viewModel.fetchProducts())
+        productService.shouldThrowError = true
+        try #require(await viewModel.fetchProducts(service: productService, error: errorLogger))
         #expect(viewModel.apiError != nil)
     }
 }

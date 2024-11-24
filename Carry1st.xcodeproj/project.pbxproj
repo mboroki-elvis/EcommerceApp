@@ -490,7 +490,7 @@
 		C46A94252CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
-			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
+			baseConfigurationReferenceRelativePath = App/Configuration/TestEnvironment.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -511,7 +511,7 @@
 		C46A94262CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
-			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
+			baseConfigurationReferenceRelativePath = App/Configuration/TestEnvironment.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -532,7 +532,7 @@
 		C46A94282CF0BC4800C58CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
-			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
+			baseConfigurationReferenceRelativePath = App/Configuration/TestEnvironment.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -551,7 +551,7 @@
 		C46A94292CF0BC4800C58CEB /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = C46A93FD2CF0BC4400C58CEB /* Carry1st */;
-			baseConfigurationReferenceRelativePath = App/Configuration/LiveEnvironment.xcconfig;
+			baseConfigurationReferenceRelativePath = App/Configuration/TestEnvironment.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

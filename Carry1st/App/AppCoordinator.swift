@@ -19,6 +19,9 @@ typealias AppRouter = Router<Routes>
 struct AppCoordinator: View {
     @Environment(CartViewModel.self) private var viewModel
     @Environment(AppRouter.self) private var router: AppRouter
+    @Environment(\.cartDatasource) private var cartDatasource
+    @Environment(\.errorLogger)  private var errorLogging
+    @Environment(\.modelContext) private var modelContext
 
     // MARK: - UI
 
@@ -49,7 +52,7 @@ struct AppCoordinator: View {
         }
         .background(Color(UIColor.systemGroupedBackground))
         .onAppear {
-            viewModel.fetchCart()
+            viewModel.fetchCart(datasource: cartDatasource, errorLogger: errorLogging, context: modelContext)
         }
     }
 }

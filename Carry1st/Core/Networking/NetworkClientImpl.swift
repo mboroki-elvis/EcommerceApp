@@ -13,7 +13,7 @@ struct NetworkClientImpl: NetworkClient {
     var dump: Bool = true
 
     private let urlSession: URLSession
-    @Inject private var environment: AppEnvironment
+    private var environment = EnvironmentLive()
 
     // MARK: - Initializers
 

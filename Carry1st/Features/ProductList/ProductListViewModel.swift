@@ -13,15 +13,13 @@ import Foundation
 final class ProductListViewModel {
     private(set) var apiError: LocalizedError?
     private(set) var products: [Product] = []
-    @ObservationIgnored @Inject private var productService: ProductServiceProtocol
-    @ObservationIgnored @Inject private var errorLogging: ErrorLoggingServiceProtocol
 
-    func fetchProducts() async {
+    func fetchProducts(service: ProductServiceProtocol, error logging: ErrorLoggingServiceProtocol) async {
         do {
-            self.products = try await productService.fetchProducts()
+            self.products = try await service.fetchProducts()
         } catch {
             apiError = error as? LocalizedError
-            errorLogging.log(event: APIErrorEvent(error: error))
+            logging.log(event: APIErrorEvent(error: error))
         }
     }
     
