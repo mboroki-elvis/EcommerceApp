@@ -1,5 +1,5 @@
 //
-//  NetworkClientImpl.swift
+//  NetworkClientImplementation.swift
 //  Carry1st
 //
 //  Created by Elvis Mwenda on 23/11/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkClientImpl: NetworkClient {
+struct NetworkClientImplementation: NetworkClient {
     // MARK: - Properties
 
     var dump: Bool = true

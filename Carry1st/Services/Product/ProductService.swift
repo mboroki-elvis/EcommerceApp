@@ -15,7 +15,7 @@ protocol ProductServiceProtocol {
 }
 
 struct ProductService: ProductServiceProtocol {
-    private let client = NetworkClientImpl()
+    private let client = NetworkClientImplementation()
 
     /// Fetches a list of products from the API using async/await
     ///
