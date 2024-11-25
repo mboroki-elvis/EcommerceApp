@@ -7,37 +7,118 @@
 
 import XCTest
 
-final class Carry1stUITests: XCTestCase {
+class Carry1stUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        // Launch the app once for all tests to improve performance
+        let app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Optionally, add teardown code here
     }
 
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testProductListLoading() throws {
         let app = XCUIApplication()
-        app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Wait for the product list to load
+        let productList = app.collectionViews["productList"]
+        XCTAssertTrue(productList.waitForExistence(timeout: 10), "The product list should appear after launching the app.")
+
+        // Verify that at least one product is loaded
+        let firstProductCell = productList.cells.element(boundBy: 0)
+        XCTAssertTrue(firstProductCell.waitForExistence(timeout: 10), "At least one product should be loaded.")
     }
 
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    func testProductSelection() throws {
+        let app = XCUIApplication()
+
+        // Wait for the product list to load
+        let productList = app.collectionViews["productList"]
+        XCTAssertTrue(productList.waitForExistence(timeout: 10), "The product list did not appear.")
+
+        // Tap the first product cell
+        let firstProductCell = productList.cells.element(boundBy: 0)
+        XCTAssertTrue(firstProductCell.waitForExistence(timeout: 10), "The first product cell did not appear.")
+        firstProductCell.tap()
+
+        // Validate navigation to the product details screen
+        let productDetails = app.collectionViews["productDetailList"]
+        XCTAssertTrue(productDetails.waitForExistence(timeout: 10), "The product details view did not appear.")
+    }
+
+    func testProductDetailsDisplay() throws {
+        let app = XCUIApplication()
+
+        // Navigate to the product details screen
+        let productList = app.collectionViews["productList"]
+        XCTAssertTrue(productList.waitForExistence(timeout: 10), "The product list did not appear.")
+
+        let firstProductCell = productList.cells.element(boundBy: 0)
+        XCTAssertTrue(firstProductCell.waitForExistence(timeout: 10), "The first product cell did not appear.")
+        firstProductCell.tap()
+
+        // Wait for the product details screen to appear
+        let productDetails = app.collectionViews["productDetailList"]
+        XCTAssertTrue(productDetails.waitForExistence(timeout: 10), "The product details screen did not appear.")
+
+        // Check the product description
+        let productDescription = productDetails.staticTexts["productDescription"]
+        XCTAssertTrue(productDescription.exists, "The product description should be visible.")
+    }
+
+    func testAddToCart() throws {
+        let app = XCUIApplication()
+
+        // Navigate to the product details screen
+        let productList = app.collectionViews["productList"]
+        XCTAssertTrue(productList.waitForExistence(timeout: 10), "The product list did not appear.")
+
+        let firstProductCell = productList.cells.element(boundBy: 0)
+        XCTAssertTrue(firstProductCell.waitForExistence(timeout: 10), "The first product cell did not appear.")
+        firstProductCell.tap()
+
+        let productDetails = app.collectionViews["productDetailList"]
+        XCTAssertTrue(productDetails.waitForExistence(timeout: 10), "The product details screen did not appear.")
+
+        // Wait for the "Add to Cart" button
+        let addToCartButton = productDetails.buttons["addToCartButton"]
+        XCTAssertTrue(addToCartButton.waitForExistence(timeout: 10), "The 'Add to Cart' button did not appear.")
+
+        // Tap the Add to Cart button
+        addToCartButton.tap()
+
+        // Verify the snackbar or cart badge
+        let snackbar = app.staticTexts["snackBar"]
+        XCTAssertTrue(snackbar.waitForExistence(timeout: 10), "The snackbar did not appear after adding to the cart.")
+    }
+
+    func testBuyNow() throws {
+        let app = XCUIApplication()
+
+        // Navigate to the product details screen
+        let productList = app.collectionViews["productList"]
+        XCTAssertTrue(productList.waitForExistence(timeout: 10), "The product list did not appear.")
+
+        let firstProductCell = productList.cells.element(boundBy: 0)
+        XCTAssertTrue(firstProductCell.waitForExistence(timeout: 10), "The first product cell did not appear.")
+        firstProductCell.tap()
+
+        let productDetails = app.collectionViews["productDetailList"]
+        XCTAssertTrue(productDetails.waitForExistence(timeout: 10), "The product details screen did not appear.")
+
+        // Wait for the "Buy Now" button
+        let buyNowButton = productDetails.buttons["buyNowButton"]
+        XCTAssertTrue(buyNowButton.waitForExistence(timeout: 10), "The 'Buy Now' button should be visible.")
+
+        // Tap the Buy Now button
+        buyNowButton.tap()
+
+        // Validate navigation to the purchase confirmation screen
+        let purchaseConfirmation = app.staticTexts["purchaseConfirmation"]
+        XCTAssertTrue(purchaseConfirmation.waitForExistence(timeout: 10), "The purchase confirmation screen should appear.")
     }
 }

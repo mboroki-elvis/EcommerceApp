@@ -6,7 +6,6 @@
 //
 
 import Observation
-import Swinject
 import Foundation
 
 @Observable

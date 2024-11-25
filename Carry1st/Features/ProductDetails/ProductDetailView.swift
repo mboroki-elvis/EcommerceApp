@@ -23,9 +23,12 @@ struct ProductDetailView: View {
         }, content: {
             List {
                 ProductRow(product: product)
+                    .accessibilityIdentifier("productDetailRow")
                 Text(product.description)
                     .font(.body)
+                    .accessibilityIdentifier("productDescription")
             }
+            .accessibilityIdentifier("productDetailList")
             .listSectionSpacing(0)
             .safeAreaInset(edge: .bottom) {
                 HStack {
@@ -43,6 +46,8 @@ struct ProductDetailView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
+                    .accessibilityIdentifier("addToCartButton")
+                    
                     Button(action: {
                         analyticsService.track(event: PurchaseEvent(product: product))
                     }) {
@@ -50,6 +55,7 @@ struct ProductDetailView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityIdentifier("buyNowButton")
                 }
             }
             .padding(.horizontal)

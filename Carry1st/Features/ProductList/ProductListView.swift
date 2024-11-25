@@ -22,7 +22,10 @@ struct ProductListView: View {
             if viewModel.products.isEmpty {
                 VStack {
                     Spacer()
-                    ProgressView().controlSize(.extraLarge).tint(.accent)
+                    ProgressView()
+                        .controlSize(.extraLarge)
+                        .tint(.accent)
+                        .accessibilityIdentifier("loadingIndicator")
                     Spacer()
                 }
             } else {
@@ -31,7 +34,9 @@ struct ProductListView: View {
                         .onTapGesture {
                             router.push(.details(product))
                         }
+                        .accessibilityIdentifier("productRow_\(product.id)")
                 }
+                .accessibilityIdentifier("productList")
                 .listSectionSpacing(0)
                 .listRowBackground(Color.container)
             }
