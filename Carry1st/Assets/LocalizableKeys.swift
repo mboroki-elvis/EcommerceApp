@@ -13,6 +13,7 @@ enum LocalizableKeys: String {
     case buyNow = "buy_now"
     case error = "error"
     case cart = "cart"
+    case added = "added"
     case ourProducts = "our_products"
 
     func toLocalizableKey() -> LocalizedStringKey {

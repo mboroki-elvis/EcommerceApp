@@ -15,6 +15,17 @@
         }
       }
     },
+    "added" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added"
+          }
+        }
+      }
+    },
     "buy_now" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -11,8 +11,8 @@ struct ProductDetailView: View {
     @Environment(CartViewModel.self) private var viewModel
     @Environment(SnackbarState.self) private var snackBarState
     @Environment(\.analyticsService) private var analyticsService
-    @Environment(\.errorLogger)  private var errorLogger
-    @Environment(\.cartDatasource)  private var cartDatasource
+    @Environment(\.errorLogger) private var errorLogger
+    @Environment(\.cartDatasource) private var cartDatasource
     @Environment(\.modelContext) private var modelContext
     
     let product: Product
@@ -31,32 +31,7 @@ struct ProductDetailView: View {
             .accessibilityIdentifier("productDetailList")
             .listSectionSpacing(0)
             .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Button(action: {
-                        viewModel.addToCart(
-                            item: product,
-                            datasource: cartDatasource,
-                            eventLogger: analyticsService,
-                            errorLogger: errorLogger,
-                            context: modelContext,
-                            snackBarState: snackBarState
-                        )
-                    }) {
-                        Text(with: .addToCart)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("addToCartButton")
-                    
-                    Button(action: {
-                        analyticsService.track(event: PurchaseEvent(product: product))
-                    }) {
-                        Text(with: .buyNow)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                    .accessibilityIdentifier("buyNowButton")
-                }
+                anchoredActionBar
             }
             .padding(.horizontal)
         })
@@ -66,6 +41,35 @@ struct ProductDetailView: View {
             description: product.name
         ).onAppear {
             analyticsService.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
+        }
+    }
+    
+    private var anchoredActionBar: some View {
+        HStack {
+            Button(action: {
+                viewModel.addToCart(
+                    item: product,
+                    datasource: cartDatasource,
+                    eventLogger: analyticsService,
+                    errorLogger: errorLogger,
+                    context: modelContext,
+                    snackBarState: snackBarState
+                )
+            }) {
+                Text(with: .addToCart)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .accessibilityIdentifier("addToCartButton")
+            
+            Button(action: {
+                analyticsService.track(event: PurchaseEvent(product: product))
+            }) {
+                Text(with: .buyNow)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .accessibilityIdentifier("buyNowButton")
         }
     }
 }

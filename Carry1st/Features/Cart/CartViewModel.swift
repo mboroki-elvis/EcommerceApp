@@ -25,7 +25,7 @@ class CartViewModel {
         defer { fetchCart(datasource: datasource, errorLogger: errorLogger, context: context) }
         do {
             try datasource.addToCart(item: CartItem(product: item), context: context)
-            snackBarState.show(title: "Added", description: item.description)
+            snackBarState.show(title: LocalizableKeys.added.localized(), description: item.description)
             eventLogger.track(event: AddToCartEvent(product: item))
         } catch {
             apiError = error as? LocalizedError

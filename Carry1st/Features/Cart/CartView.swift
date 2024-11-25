@@ -12,8 +12,8 @@ struct CartView: View {
     @Environment(CartViewModel.self) private var viewModel
     @Environment(SnackbarState.self) private var snackBarState
     @Environment(\.analyticsService) private var analyticsService
-    @Environment(\.errorLogger)  private var errorLogger
-    @Environment(\.cartDatasource)  private var cartDatasource
+    @Environment(\.errorLogger) private var errorLogger
+    @Environment(\.cartDatasource) private var cartDatasource
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
