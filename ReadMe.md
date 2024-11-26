@@ -1,7 +1,7 @@
-# Carry1st Project
+# Project
 
 ## Overview
-The Carry1st project is a SwiftUI-based application designed to provide a modular and scalable structure.  
+The project is a SwiftUI-based application designed to provide a modular and scalable structure.  
 It includes features such as product listing, cart management, detailed error handling, and analytics tracking.
 
 ## Key Features
@@ -63,8 +63,7 @@ Carry1st/
 
 ## Usage
 1. Open the project in Xcode.
-2. Choose the appropriate environment configuration (`LiveEnvironment` or `TestEnvironment`) in the scheme.
-3. Build and run the project on your simulator or connected device.
+2. Build and run the project on your simulator or connected device.
 
 ## Notes
 - This project adheres to the MVVM-C architecture for better separation of concerns.
