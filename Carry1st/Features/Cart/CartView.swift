@@ -17,9 +17,9 @@ struct CartView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        ContainerView(error: viewModel.apiError, onDismissError: {
+        ContainerView(error: viewModel.apiError) {
             viewModel.resetError()
-        }, content: {
+        } content: {
             List {
                 ForEach(viewModel.cart) { item in
                     HStack {
@@ -34,7 +34,7 @@ struct CartView: View {
                                 context: modelContext
                             )
                         }) {
-                            Image(systemName: "trash")
+                            Image(systemName: "trash").tint(.red)
                         }
                         .buttonStyle(.borderless)
                     }
@@ -52,7 +52,7 @@ struct CartView: View {
             }
             .listSectionSpacing(0)
             .listRowBackground(Color.container)
-        })
+        }
         .onAppear {
             viewModel.fetchCart(datasource: cartDatasource, errorLogger: errorLogger, context: modelContext)
             analyticsService.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))

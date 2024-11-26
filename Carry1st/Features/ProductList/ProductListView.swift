@@ -44,9 +44,9 @@ struct ProductListView: View {
                 .onTapGesture {
                     router.push(.details(product))
                 }
-                .accessibilityIdentifier("productRow_\(product.id)")
+                .accessibilityIdentifier("\(AccssibilityIdentifier.productRow.rawValue)\(product.id)")
         }
-        .accessibilityIdentifier("productList")
+        .accessibilityIdentifier(AccssibilityIdentifier.productList.rawValue)
         .listSectionSpacing(0)
         .listRowBackground(Color.container)
     }
@@ -57,8 +57,16 @@ struct ProductListView: View {
             ProgressView()
                 .controlSize(.extraLarge)
                 .tint(.accent)
-                .accessibilityIdentifier("loadingIndicator")
+                .accessibilityIdentifier(AccssibilityIdentifier.loadingIndicator.rawValue)
             Spacer()
         }
+    }
+}
+
+extension ProductListView {
+    enum AccssibilityIdentifier: String {
+        case productList
+        case productRow = "productRow_"
+        case loadingIndicator
     }
 }

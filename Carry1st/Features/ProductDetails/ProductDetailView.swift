@@ -14,21 +14,21 @@ struct ProductDetailView: View {
     @Environment(\.errorLogger) private var errorLogger
     @Environment(\.cartDatasource) private var cartDatasource
     @Environment(\.modelContext) private var modelContext
-    
+
     let product: Product
-    
+
     var body: some View {
         ContainerView(error: viewModel.apiError, onDismissError: {
             viewModel.resetError()
         }, content: {
             List {
                 ProductRow(product: product)
-                    .accessibilityIdentifier("productDetailRow")
+                    .accessibilityIdentifier(AccessbilityIdentifier.productDetailRow.rawValue)
                 Text(product.description)
                     .font(.body)
-                    .accessibilityIdentifier("productDescription")
+                    .accessibilityIdentifier(AccessbilityIdentifier.productDescription.rawValue)
             }
-            .accessibilityIdentifier("productDetailList")
+            .accessibilityIdentifier(AccessbilityIdentifier.productDetailList.rawValue)
             .listSectionSpacing(0)
             .safeAreaInset(edge: .bottom) {
                 anchoredActionBar
@@ -43,7 +43,7 @@ struct ProductDetailView: View {
             analyticsService.track(event: LoadScreenEvent(screenName: String(describing: Self.self)))
         }
     }
-    
+
     private var anchoredActionBar: some View {
         HStack {
             Button(action: {
@@ -60,8 +60,8 @@ struct ProductDetailView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
-            .accessibilityIdentifier("addToCartButton")
-            
+            .accessibilityIdentifier(AccessbilityIdentifier.addToCartButton.rawValue)
+
             Button(action: {
                 analyticsService.track(event: PurchaseEvent(product: product))
             }) {
@@ -69,7 +69,17 @@ struct ProductDetailView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
-            .accessibilityIdentifier("buyNowButton")
+            .accessibilityIdentifier(AccessbilityIdentifier.buyNowButton.rawValue)
         }
+    }
+}
+
+extension ProductDetailView {
+    enum AccessbilityIdentifier: String {
+        case addToCartButton
+        case buyNowButton
+        case productDetailList
+        case productDescription
+        case productDetailRow
     }
 }
